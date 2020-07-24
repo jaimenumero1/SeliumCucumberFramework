@@ -29,7 +29,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     When User logs in with "JohnDoe@testemail.com " and "Password1"
     Then User successfully logged in to home page
-    When User clicks on New Checking account
+    And User clicks on "Checking" account
     Then Verify "New Checking Account" header is displayed
     And  Verify "Select Checking Account Type" label is displayed
     And Verify that radio buttons are unchecked
@@ -40,13 +40,28 @@ Feature:
     And Verify that "Reset" button is displayed
 
 
+  Scenario Outline: Verify the Reset button clears out filled fields
+    Given User navigates to Digital Bank login page
+    And Verify that web title is "Digital Bank"
+    And User logs in with "JohnDoe@testemail.com " and "Password1"
+    And User successfully logged in to home page
+    And User clicks on "<type>" account
+    When User creates "<type>" account with following info and click Reset button
+      | accountType   | accountOwnership   | accountName   | initialDeposit   |
+      | <accountType> | <accountOwnership> | <accountName> | <initialDeposit> |
+    Then Verify that fields are reset to default values
+    Examples:
+      | type     | accountType       | accountOwnership | accountName  | initialDeposit |
+      | Savings  | Money Market      | Joint            | Test Account | 200            |
+      | Checking | Interest Checking | Individual       | Test Account | 200            |
+
   @S4
   Scenario: Checking account page validations without account type
     Given User navigates to Digital Bank login page
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account without Account Type
     Then Verify field error message "Please select one of these options." is displayed
 
@@ -56,7 +71,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account without Account Ownership
     Then Verify field error message "Please select one of these options." is displayed
 
@@ -66,7 +81,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account without Account Name
     Then Verify field error message "Please fill out this field." is displayed
 
@@ -76,7 +91,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account without Initial Deposit Amount
     Then Verify field error message "Please fill out this field." is displayed
 
@@ -86,7 +101,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account with "<deposit>" deposit
     Then Verify field error message "<errorMsg>" is displayed
     Examples:
@@ -101,7 +116,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User submits an account with "<deposit>" deposit
     Then Verify alert error message "The initial deposit ($<deposit>) entered does not meet the minimum amount ($25.00) required. Please enter a valid deposit amount." is displayed
     Examples:
@@ -114,14 +129,14 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    And User clicks on "Checking" account
     When User creates "Checking" account with following info:
       | accountType       | accountOwnership | accountName  | initialDeposit |
       | Interest Checking | Joint            | Test Account | 200            |
     Then Verify newly created account information
 
 
-   @SavingsUserStories1
+  @SavingsUserStories1
   Scenario: As a User, I want have the ability to create a new Savings bank account so that my payment can be processed from my preferred account.
 
     Given User navigates to Digital Bank login page
@@ -139,7 +154,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     When User logs in with "JohnDoe@testemail.com " and "Password1"
     Then User successfully logged in to home page
-    When User clicks on New Savings account
+    When User clicks on "Savings" account
     Then Verify "New Savings Account" header is displayed
     And  Verify "Select Checking Account Type" label is displayed
     And Verify that radio buttons are unchecked
@@ -156,7 +171,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User submits an account without Account Type
     Then Verify field error message "Please select one of these options." is displayed
 
@@ -166,7 +181,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Checking account
+    When User clicks on "Savings" account
     When User submits an account without Account Ownership
     Then Verify field error message "Please select one of these options." is displayed
 
@@ -176,7 +191,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User submits an account without Account Name
     Then Verify field error message "Please fill out this field." is displayed
 
@@ -186,7 +201,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User submits an account without Initial Deposit Amount
     Then Verify field error message "Please fill out this field." is displayed
 
@@ -196,7 +211,7 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User submits an account with "<deposit>" deposit
     Then Verify field error message "<errorMsg>" is displayed
     Examples:
@@ -211,21 +226,21 @@ Feature:
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User submits an account with "<deposit>" deposit
     Then Verify alert error message "The initial deposit ($<deposit>) entered does not meet the minimum amount ($2500.00) required. Please enter a valid deposit amount." is displayed
     Examples:
       | deposit |
-      | 150.22   |
+      | 150.22  |
 
-    @SavingsUserStories10
+  @SavingsUserStories10
   Scenario: Create a Savings account with valid data
     Given User navigates to Digital Bank login page
     And Verify that web title is "Digital Bank"
     And User logs in with "JohnDoe@testemail.com " and "Password1"
     And User successfully logged in to home page
-    And User clicks on New Savings account
+    When User clicks on "Savings" account
     When User creates "Savings" account with following info:
-      | accountType       | accountOwnership | accountName  | initialDeposit |
-      | Money Market      | Joint            | Test Account | 2500            |
+      | accountType  | accountOwnership | accountName  | initialDeposit |
+      | Money Market | Joint            | Test Account | 2500           |
     Then Verify newly created account information

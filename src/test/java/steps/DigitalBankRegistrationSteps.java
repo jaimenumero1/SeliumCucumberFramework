@@ -163,5 +163,6 @@ public class DigitalBankRegistrationSteps {
         assertEquals(expectedMessage,message.getText().trim());
     }
 
+
 }
 

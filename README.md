@@ -11,8 +11,9 @@ based on the given requirements for Bank Account functionalities.
 Practice scenario/scenario outlines with example tables
 2. Create DigitalBankBankingAccountsSteps class and implement your scenarios
 3. Create and Implement Runner class
-4. After completing automation script, implement cucumber-reporting
-5. Use best practices to locate a webelemnets using:
+4. Create and Implement a BrowserHelper class to store reusable methods
+5. After completing automation script, implement cucumber-reporting
+6. Use best practices to locate a webelemnets using:
  - Id locator
  - Name locator
  - linkText & Partial linkText
@@ -20,7 +21,7 @@ Practice scenario/scenario outlines with example tables
  - XPath
 
 Prerequisites: 
-Create a new User 
+Create a new user for each group
 ```
      
 ## BANKING ACCOUNTS Requirements:
