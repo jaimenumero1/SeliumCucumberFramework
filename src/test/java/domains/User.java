@@ -13,8 +13,6 @@ public class User {
 
     private String title;
     private String firstName;
-
-
     private String lastName;
     private String gender;
     private String dob;
@@ -27,6 +25,24 @@ public class User {
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
+    private String emailAddress;
+    private String ssn;
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
 
     public String getLastName() {
         return lastName;
@@ -139,8 +155,6 @@ public class User {
     public String getWorkPhone() {
         return workPhone;
     }
-
-
 
 
 }

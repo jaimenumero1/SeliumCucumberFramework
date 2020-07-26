@@ -27,11 +27,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class DigitalBankRegistrationSteps {
 
+    private WebDriver driver;
+    private final String LOGIN_PAGE_URL = "http://dbankdemo.com/login";
 
 
     @Before
-    public void setUp(){
-        Driver.getDriver();
+    public void setUp() {
+        driver = Driver.getDriver();
+        driver.get(LOGIN_PAGE_URL);
+        assertEquals(LOGIN_PAGE_URL, driver.getCurrentUrl());
     }
 
     @Given("^User navigates to Digital Bank login page$")
@@ -51,7 +55,7 @@ public class DigitalBankRegistrationSteps {
         // For automatic transformation, change DataTable to one of
         // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
         // E,K,V must be a scalar (String, Integer, Date, enum etc)
-
+        System.out.println(arg1);
     }
 
     @Then("^User successfully logged in to home page$")
@@ -60,13 +64,20 @@ public class DigitalBankRegistrationSteps {
     }
 
     @When("^User logs in with \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void user_logs_in_with_and(String arg1, String arg2) {
+    public void user_logs_in_with_and(String user, String pass) throws InterruptedException {
+        WebElement userName = driver.findElement(By.id("username"));
+        WebElement password = driver.findElement(By.id("password"));
+        userName.sendKeys(user);
+        password.sendKeys(pass);
+        driver.findElement(By.id("submit")).click();
+
+
 
     }
 
     @Then("^User should be displayed with the error message \"([^\"]*)\"$")
     public void user_should_be_displayed_with_the_error_message(String arg1) {
-
+        Assert.assertTrue("Error message",driver.findElement(By.xpath("//span[@class='badge badge-pill badge-danger']")).isDisplayed());
     }
 
     @Given("^User navigates to Digital Bank signup page$")
@@ -81,17 +92,19 @@ public class DigitalBankRegistrationSteps {
         // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
         // E,K,V must be a scalar (String, Integer, Date, enum etc)
         User user = table.asList(User.class).get(0);
-        Driver.getDriver().findElement(By.cssSelector("")).sendKeys(user.getFirstName());
-        Driver.getDriver().findElement(By.cssSelector("")).sendKeys(user.getLastName());
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
-        Driver.getDriver().findElement(By.cssSelector(""));
+
+        Driver.getDriver().findElement(By.xpath("//select[@id='title']")).click();
+        Driver.getDriver().findElement(By.xpath("//option[text()='Mr.']")).click();
+        Driver.getDriver().findElement(By.xpath("//input[@id='firstName']")).sendKeys(user.getFirstName());
+        Driver.getDriver().findElement(By.id("lastName")).sendKeys(user.getLastName());
+        Driver.getDriver().findElement(By.xpath("//input[@id='gender'][1]")).click();
+        Driver.getDriver().findElement(By.id("dob")).sendKeys(user.getDob());
+        Driver.getDriver().findElement(By.id("ssn")).sendKeys(user.getSsn());
+        Driver.getDriver().findElement(By.id("emailAddress")).sendKeys(user.getEmailAddress());
+        Driver.getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys(user.getPassword());
+        Driver.getDriver().findElement(By.xpath("//input[@id='confirmPassword']")).sendKeys(user.getPassword());
+        Driver.getDriver().findElement(By.xpath("//button[text()='Next']")).click();
+
     }
 
     @Then("^User should be displayed with the message \"([^\"]*)\"$")
@@ -100,8 +113,8 @@ public class DigitalBankRegistrationSteps {
     }
 
     @After
-    public void tearDown(){
-//        Driver.closeDriver();
+    public void tearDown() {
+        Driver.closeDriver();
     }
 
 }
