@@ -26,10 +26,8 @@ import static org.junit.Assert.assertTrue;
  * Add implementations of steps from feature file
  */
 public class DigitalBankRegistrationSteps {
-
-    private WebDriver driver;
-    private final String LOGIN_PAGE_URL = "http://dbankdemo.com/login";
-
+  WebDriver driver;
+  String LOGIN_PAGE_URL;
 
     @Before
     public void setUp() {
@@ -116,6 +114,7 @@ public class DigitalBankRegistrationSteps {
     public void tearDown() {
         Driver.closeDriver();
     }
+
 
 }
 
