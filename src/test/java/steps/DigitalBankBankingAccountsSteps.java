@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import domains.BankAccount;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,12 +14,11 @@ import utilities.Driver;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Map;
 
 public class DigitalBankBankingAccountsSteps {
 
     private final WebDriver driver = Driver.getDriver();
-    private List<Map<String, String>> accountInfo;
+    private List<BankAccount> accountInfo;
 
     @And("^Verify that \"([^\"]*)\" welcoming message is displayed$")
     public void verifyThatWelcomingMessageIsDisplayed(String arg0) throws Throwable {
@@ -52,13 +52,12 @@ public class DigitalBankBankingAccountsSteps {
     }
 
 
-
     @When("^User clicks on \"([^\"]*)\" account$")
     public void userClicksOnAccount(String type) {
 
         WebElement element = driver.findElement(By.linkText(type));
         element.click();
-        element = driver.findElement(By.linkText("New "+type));
+        element = driver.findElement(By.linkText("New " + type));
         element.click();
     }
 
@@ -111,7 +110,6 @@ public class DigitalBankBankingAccountsSteps {
         deposit.sendKeys("200");
         WebElement submit = driver.findElement(By.cssSelector("[class='btn btn-primary btn-sm']"));
         submit.click();
-
 
     }
 
@@ -181,17 +179,21 @@ public class DigitalBankBankingAccountsSteps {
 
 
     @When("^User creates \"([^\"]*)\" account with following info:$")
-    public void user_creates_account_with_following_info(String arg1, DataTable dataTable) throws Throwable {
-        accountInfo = dataTable.asMaps(String.class, String.class);
+    public void user_creates_account_with_following_info(String arg1, List<BankAccount> accounts) throws Throwable {
+        accountInfo = accounts;
 
-        WebElement accountOwnership = driver.findElement(By.id(accountInfo.get(0).get("accountType")));
-        accountOwnership.click();
-        WebElement accountType = driver.findElement(By.id(accountInfo.get(0).get("accountOwnership")));
-        accountType.click();
-        WebElement accountName = driver.findElement(By.id("name"));
-        accountName.sendKeys(accountInfo.get(0).get("accountName"));
-        WebElement deposit = driver.findElement(By.id("openingBalance"));
-        deposit.sendKeys(accountInfo.get(0).get("initialDeposit"));
+        for (BankAccount account : accounts) {
+
+            WebElement accountOwnership = driver.findElement(By.id(account.getAccountType()));
+            accountOwnership.click();
+            WebElement accountType = driver.findElement(By.id(account.getAccountOwnership()));
+            accountType.click();
+            WebElement accountName = driver.findElement(By.id("name"));
+            accountName.sendKeys(account.getAccountName());
+            WebElement deposit = driver.findElement(By.id("openingBalance"));
+            deposit.sendKeys(account.getInitialDeposit());
+
+        }
         WebElement submit = driver.findElement(By.cssSelector("[class='btn btn-primary btn-sm']"));
         submit.click();
 
@@ -199,17 +201,20 @@ public class DigitalBankBankingAccountsSteps {
     }
 
     @When("^User creates \"([^\"]*)\" account with following info and click Reset button$")
-    public void user_creates_account_with_following_info_and_click_reset_button(String arg1, DataTable dataTable) throws Throwable {
-        accountInfo = dataTable.asMaps(String.class, String.class);
+    public void user_creates_account_with_following_info_and_click_reset_button(String arg1, List<BankAccount> accounts) throws Throwable {
+        accountInfo = accounts;
 
-        WebElement accountOwnership = driver.findElement(By.id(accountInfo.get(0).get("accountType")));
-        accountOwnership.click();
-        WebElement accountType = driver.findElement(By.id(accountInfo.get(0).get("accountOwnership")));
-        accountType.click();
-        WebElement accountName = driver.findElement(By.id("name"));
-        accountName.sendKeys(accountInfo.get(0).get("accountName"));
-        WebElement deposit = driver.findElement(By.id("openingBalance"));
-        deposit.sendKeys(accountInfo.get(0).get("initialDeposit"));
+        for (BankAccount account : accounts) {
+
+            WebElement accountOwnership = driver.findElement(By.id(account.getAccountOwnership()));
+            accountOwnership.click();
+            WebElement accountType = driver.findElement(By.id(account.getAccountType()));
+            accountType.click();
+            WebElement accountName = driver.findElement(By.id("name"));
+            accountName.sendKeys(account.getAccountName());
+            WebElement deposit = driver.findElement(By.id("openingBalance"));
+            deposit.sendKeys(account.getInitialDeposit());
+        }
         WebElement reset = driver.findElement(By.cssSelector("[class='btn btn-danger btn-sm']"));
         reset.click();
 
@@ -219,10 +224,14 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify that fields are reset to default values$")
     public void verifyThatFieldsAreResetToDefaultValues() {
 
-        WebElement accountOwnership = driver.findElement(By.id(accountInfo.get(0).get("accountType")));
-        Assert.assertFalse(accountOwnership.isSelected());
-        WebElement accountType = driver.findElement(By.id(accountInfo.get(0).get("accountOwnership")));
-        Assert.assertFalse(accountType.isSelected());
+        for (BankAccount account : accountInfo) {
+
+            WebElement accountOwnership = driver.findElement(By.id(account.getAccountOwnership()));
+            Assert.assertFalse(accountOwnership.isSelected());
+            WebElement accountType = driver.findElement(By.id(account.getAccountType()));
+            Assert.assertFalse(accountType.isSelected());
+        }
+
         WebElement accountName = driver.findElement(By.id("name"));
         Assert.assertTrue(BrowserHelper.isBlank(accountName));
         WebElement deposit = driver.findElement(By.id("openingBalance"));
@@ -236,17 +245,20 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify newly created account information$")
     public void verify_newly_created_account_information() throws Throwable {
 
-        WebElement accountName = driver.findElement(By.xpath("//div[text()='" + accountInfo.get(0).get("accountName") + "']"));
+
+        for (BankAccount account: accountInfo){
+        WebElement accountName = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']"));
         Assert.assertTrue(accountName.isDisplayed());
 
-        WebElement accountType = driver.findElement(By.xpath("//div[text()='" + accountInfo.get(0).get("accountName") + "']/..//div[2]/small"));
-        Assert.assertEquals("Account: " + accountInfo.get(0).get("accountType"), accountType.getText().trim());
+        WebElement accountType = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[2]/small"));
+        Assert.assertEquals("Account: " + account.getAccountType(), accountType.getText().trim());
 
-        WebElement accountOwnership = driver.findElement(By.xpath("//div[text()='" + accountInfo.get(0).get("accountName") + "']/..//div[3]/small"));
-        Assert.assertEquals("Ownership: " + accountInfo.get(0).get("accountOwnership"), accountOwnership.getText().trim());
+        WebElement accountOwnership = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[3]/small"));
+        Assert.assertEquals("Ownership: " + account.getAccountOwnership(), accountOwnership.getText().trim());
 
-        WebElement balance = driver.findElement(By.xpath("//div[text()='" + accountInfo.get(0).get("accountName") + "']/..//div[7]"));
-        Assert.assertEquals("Balance: $" + new DecimalFormat("0.00").format(Double.valueOf(accountInfo.get(0).get("initialDeposit"))), balance.getText().trim());
+        WebElement balance = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[7]"));
+        Assert.assertEquals("Balance: $" + new DecimalFormat("0.00").format(Double.valueOf(account.getInitialDeposit())), balance.getText().trim());
+        }
 
         WebElement transactionsHeader = driver.findElement(By.xpath("//strong[@class='card-title text-light']"));
         Assert.assertEquals("Transactions", transactionsHeader.getText().trim());

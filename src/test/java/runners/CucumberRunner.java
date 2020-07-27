@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 /**
  * //TODO:
- * Implement a Juint Test Runner class.
+ * Implement a Junit Test Runner class.
  * This class just needs annotations to understand that cucumber features would be run through it
  * and you can specify feature files to be picked up plus the steps package location.
  */
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 	    features = {"src/test/resources"},
 	    glue = {"steps"},
 
-		tags = {"@SavingsUserStories10"},
+		tags = {"@regression"},
 		dryRun = false
 
 
