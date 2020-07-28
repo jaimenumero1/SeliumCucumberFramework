@@ -1,8 +1,7 @@
 @regression
-Feature:
-"""As a Customer, I want to add/edit/manage Bank Account Payment Profile"""
+Feature: As a Customer, I want to add/edit/manage Bank Account Payment Profile
 
-  Background:
+  Background: Log in to Digital Bank
     Given User navigates to Digital Bank login page
     And Verify that web title is "Digital Bank"
     When User logs in with "JohnDoe@testemail.com " and "Password1"
