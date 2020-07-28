@@ -23,31 +23,31 @@ public class DigitalBankBankingAccountsSteps {
     @And("^Verify that \"([^\"]*)\" welcoming message is displayed$")
     public void verifyThatWelcomingMessageIsDisplayed(String arg0) throws Throwable {
         BrowserHelper.waitForPageLoadComplete(driver, 30);
-        Assert.assertTrue(driver.findElement(By.xpath("//li[contains(text(),'" + arg0 + "')]")).isDisplayed());
+        Assert.assertTrue("Welcoming message is not displayed",driver.findElement(By.xpath("//li[contains(text(),'" + arg0 + "')]")).isDisplayed());
     }
 
     @And("^Verify that panel with account information is displayed$")
     public void verifyThatPanelWithAccountInformationIsDisplayed() {
         WebElement home = driver.findElement(By.linkText("Home"));
-        Assert.assertTrue(home.isDisplayed());
+        Assert.assertTrue("'Home' link is not displayed",home.isDisplayed());
 
         WebElement checking = driver.findElement(By.linkText("Checking"));
-        Assert.assertTrue(checking.isDisplayed());
+        Assert.assertTrue("'Checking' link is not displayed",checking.isDisplayed());
 
         WebElement savings = driver.findElement(By.linkText("Savings"));
-        Assert.assertTrue(savings.isDisplayed());
+        Assert.assertTrue("'Savings' link is not displayed",savings.isDisplayed());
 
         WebElement transactions = driver.findElement(By.linkText("Transactions"));
-        Assert.assertTrue(transactions.isDisplayed());
+        Assert.assertTrue("'Transactions' link is not displayed",transactions.isDisplayed());
 
         WebElement digitalCredit = driver.findElement(By.linkText("Digital Credit"));
-        Assert.assertTrue(digitalCredit.isDisplayed());
+        Assert.assertTrue("'Digital credit' link is not displayed",digitalCredit.isDisplayed());
 
         WebElement transfer = driver.findElement(By.linkText("Transfer"));
-        Assert.assertTrue(transfer.isDisplayed());
+        Assert.assertTrue("'Transfer' link is not displayed",transfer.isDisplayed());
 
         WebElement visaDirect = driver.findElement(By.linkText("VISA Direct"));
-        Assert.assertTrue(visaDirect.isDisplayed());
+        Assert.assertTrue("'Visa Credit' link is not displayed",visaDirect.isDisplayed());
 
     }
 
@@ -64,13 +64,13 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify that \"([^\"]*)\" dropdown has following options$")
     public void verify_that_dropdown_has_following_options(String dropdown, DataTable options) throws Throwable {
         WebElement checking = driver.findElement(By.linkText(dropdown));
-        Assert.assertTrue(checking.isDisplayed());
+        Assert.assertTrue("'Checking' link is not displayed",checking.isDisplayed());
         List<String> list = options.asList(String.class);
         checking.click();
         List<WebElement> accountOptions = driver.findElements(By.xpath("//a[text()='" + dropdown + "']/..//ul//a"));
 
         for (int i = 0; i < list.size(); i++) {
-            Assert.assertEquals(list.get(i), accountOptions.get(i).getText().trim());
+            Assert.assertEquals(list.get(i)+" link did not match",list.get(i), accountOptions.get(i).getText().trim());
         }
 
 
@@ -79,25 +79,25 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify \"([^\"]*)\" header is displayed$")
     public void verifyHeaderIsDisplayed(String arg0) throws Throwable {
         WebElement header = driver.findElement(By.xpath("//strong[starts-with(@class,'card-title')]"));
-        Assert.assertEquals(arg0, header.getText().trim());
+        Assert.assertEquals("Failed: Header mismatch",arg0, header.getText().trim());
     }
 
     @And("^Verify \"([^\"]*)\" label is displayed$")
     public void verifyLabelIsDisplayed(String arg0) throws Throwable {
-        Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='" + arg0 + "']")).isDisplayed());
+        Assert.assertTrue(arg0+ " label is not displayed",driver.findElement(By.xpath("//strong[text()='" + arg0 + "']")).isDisplayed());
     }
 
     @And("^Verify that radio buttons are unchecked$")
     public void verifyThatRadioButtonsAreUnchecked() {
         List<WebElement> radioBtnList = driver.findElements(By.xpath("//input[@type='radio']"));
         for (WebElement el : radioBtnList) {
-            Assert.assertFalse(el.isSelected());
+            Assert.assertFalse("Failed: Radio buttons are selected",el.isSelected());
         }
     }
 
     @And("^Verify that \"([^\"]*)\" button is displayed$")
     public void verifyThatButtonIsDisplayed(String arg0) throws Throwable {
-        Assert.assertTrue(driver.findElement(By.xpath("//button[contains(text(),'" + arg0 + "')]")).isDisplayed());
+        Assert.assertTrue("Failed: "+arg0+ " is not Displayed",driver.findElement(By.xpath("//button[contains(text(),'" + arg0 + "')]")).isDisplayed());
     }
 
     @When("^User submits an account without Account Type$")
@@ -116,7 +116,7 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify field error message \"([^\"]*)\" is displayed$")
     public void verifyFieldErrorMessageIsDisplayed(String arg0) throws Throwable {
 
-        Assert.assertEquals(arg0, driver.switchTo().activeElement().getAttribute("validationMessage"));
+        Assert.assertEquals("Failed: Validation error message mismatch",arg0, driver.switchTo().activeElement().getAttribute("validationMessage"));
 
     }
 
@@ -174,7 +174,7 @@ public class DigitalBankBankingAccountsSteps {
     @Then("^Verify alert error message \"([^\"]*)\" is displayed$")
     public void verifyAlertErrorMessageIsDisplayed(String arg0) throws Throwable {
         WebElement error = driver.findElement(By.xpath("//div[contains(@class,'alert-danger')]//span[2]"));
-        Assert.assertEquals(arg0, error.getText());
+        Assert.assertEquals("Failed: Alert error message mismatch",arg0, error.getText());
     }
 
 
@@ -229,13 +229,13 @@ public class DigitalBankBankingAccountsSteps {
             WebElement accountOwnership = driver.findElement(By.id(account.getAccountOwnership()));
             Assert.assertFalse(accountOwnership.isSelected());
             WebElement accountType = driver.findElement(By.id(account.getAccountType()));
-            Assert.assertFalse(accountType.isSelected());
+            Assert.assertFalse("Failed: Account type radio button is selected",accountType.isSelected());
         }
 
         WebElement accountName = driver.findElement(By.id("name"));
-        Assert.assertTrue(BrowserHelper.isBlank(accountName));
+        Assert.assertTrue("Failed: Account name field is not blank",BrowserHelper.isBlank(accountName));
         WebElement deposit = driver.findElement(By.id("openingBalance"));
-        Assert.assertTrue(BrowserHelper.isBlank(deposit));
+        Assert.assertTrue("Failed: Initial deposit field is not blank",BrowserHelper.isBlank(deposit));
         WebElement reset = driver.findElement(By.cssSelector("[class='btn btn-danger btn-sm']"));
         reset.click();
 
@@ -248,34 +248,34 @@ public class DigitalBankBankingAccountsSteps {
 
         for (BankAccount account: accountInfo){
         WebElement accountName = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']"));
-        Assert.assertTrue(accountName.isDisplayed());
+        Assert.assertTrue("Failed: Account name is not displayed",accountName.isDisplayed());
 
         WebElement accountType = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[2]/small"));
-        Assert.assertEquals("Account: " + account.getAccountType(), accountType.getText().trim());
+        Assert.assertEquals("Failed: Account name mismatch","Account: " + account.getAccountType(), accountType.getText().trim());
 
         WebElement accountOwnership = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[3]/small"));
-        Assert.assertEquals("Ownership: " + account.getAccountOwnership(), accountOwnership.getText().trim());
+        Assert.assertEquals("Failed: Account ownership mismatch","Ownership: " + account.getAccountOwnership(), accountOwnership.getText().trim());
 
         WebElement balance = driver.findElement(By.xpath("//div[text()='" + account.getAccountName() + "']/..//div[7]"));
-        Assert.assertEquals("Balance: $" + new DecimalFormat("0.00").format(Double.valueOf(account.getInitialDeposit())), balance.getText().trim());
+        Assert.assertEquals("Failed: Balance mismatch","Balance: $" + new DecimalFormat("0.00").format(Double.valueOf(account.getInitialDeposit())), balance.getText().trim());
         }
 
         WebElement transactionsHeader = driver.findElement(By.xpath("//strong[@class='card-title text-light']"));
-        Assert.assertEquals("Transactions", transactionsHeader.getText().trim());
+        Assert.assertEquals("Failed: Transaction table is not displayed","Transactions", transactionsHeader.getText().trim());
 
         WebElement transactionTable = driver.findElement(By.id("transactionTable"));
-        Assert.assertTrue(transactionTable.isDisplayed());
+        Assert.assertTrue("Failed: Transaction table is not displayed",transactionTable.isDisplayed());
 
         WebElement tableHeader = driver.findElement(By.xpath("//table[@id='transactionTable']//th[1]"));
-        Assert.assertEquals("Date", tableHeader.getText());
+        Assert.assertEquals("Failed: Date header is not displayed","Date", tableHeader.getText());
         tableHeader = driver.findElement(By.xpath("//table[@id='transactionTable']//th[2]"));
-        Assert.assertEquals("Category", tableHeader.getText());
+        Assert.assertEquals("Failed: Category header is not displayed","Category", tableHeader.getText());
         tableHeader = driver.findElement(By.xpath("//table[@id='transactionTable']//th[3]"));
-        Assert.assertEquals("Description", tableHeader.getText());
+        Assert.assertEquals("Failed: Description header is not displayed","Description", tableHeader.getText());
         tableHeader = driver.findElement(By.xpath("//table[@id='transactionTable']//th[4]"));
-        Assert.assertEquals("Amount", tableHeader.getText());
+        Assert.assertEquals("Failed: Amount header is not displayed","Amount", tableHeader.getText());
         tableHeader = driver.findElement(By.xpath("//table[@id='transactionTable']//th[5]"));
-        Assert.assertEquals("Balance", tableHeader.getText());
+        Assert.assertEquals("Failed: Balance header is not displayed","Balance", tableHeader.getText());
 
 
     }
