@@ -161,6 +161,7 @@ public class DigitalBankRegistrationSteps {
         Driver.getDriver().findElement(By.cssSelector(""));
         Driver.getDriver().findElement(By.cssSelector(""));
     }
+//hellomia
 
     @Then("^User should be displayed with the message \"([^\"]*)\"$")
     public void user_should_be_displayed_with_the_message(String arg1) {
