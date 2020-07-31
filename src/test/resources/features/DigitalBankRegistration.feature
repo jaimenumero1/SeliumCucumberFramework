@@ -42,3 +42,9 @@ Feature: Register to Digital Bank application
       | title | firstName | lastName | gender | dob        | password  | address    | locality | region | postalCode | country | homePhone  | mobilePhone | workPhone  |
       | Mr.   | Jack      | Test     | M      | 12/12/1990 | Tester123 | 12 Main st | City     | CA     | 99921      | US      | 2146591008 | 2136591208  | 1126593008 |
     Then User should be displayed with the message "Registration Successful. Please Login."
+
+#  In DigitalBankAccountUIFramework:
+#  1. Convert all existing data tables to use List<POJO> directly in the stepDefMethod param
+#  2. Convert Negative Login Test Scenarios to use Scenario Outline
+#  3. Move   Scenario: As a user, I want to create Digital Bank account to its own feature file
+#  4. Add a background in Feature: Register to Digital Bank application

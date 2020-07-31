@@ -16,24 +16,23 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
     //TODO: Implement here
+
     private static WebDriver driver;
 
-    private Driver(){};
+    private Driver(){}
 
     public static WebDriver getDriver(){
-        if(driver == null){
+
+        if(driver==null) {
+
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
+
+        driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
         return driver;
+
     }
-
-    public static void closeDriver(){
-        if(driver != null) driver.quit();
-    }
-
-
-
 }
