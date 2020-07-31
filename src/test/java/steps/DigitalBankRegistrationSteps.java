@@ -6,20 +6,12 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import utilities.Driver;
-import utilities.MockData;
 import domains.User;
-
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 /**
  * TODO:
@@ -54,7 +46,6 @@ public class DigitalBankRegistrationSteps {
         // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
         // E,K,V must be a scalar (String, Integer, Date, enum etc)
 
-
     }
 
     @Then("^User successfully logged in to home page$")
@@ -80,7 +71,6 @@ public class DigitalBankRegistrationSteps {
     @Then("^User should be displayed with the message \"([^\"]*)\"$")
     public void user_should_be_displayed_with_the_message(String arg1){
         // Write code here that turns the phrase above into concrete actions
-
     }
 
 
