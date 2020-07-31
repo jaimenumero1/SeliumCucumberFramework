@@ -75,20 +75,7 @@ public class DigitalBankRegistrationSteps {
 
     }
 
-    @Given("^User navigates to Digital Bank signup page$")
-    public void user_navigates_to_Digital_Bank_signup_page(){
-        // Write code here that turns the phrase above into concrete actions
 
-    }
-
-    @When("^User creates account with following fields$")
-    public void user_creates_account_with_following_fields(DataTable arg1)  {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-        // E,K,V must be a scalar (String, Integer, Date, enum etc)
-
-    }
 
     @Then("^User should be displayed with the message \"([^\"]*)\"$")
     public void user_should_be_displayed_with_the_message(String arg1){
@@ -100,41 +87,6 @@ public class DigitalBankRegistrationSteps {
     @Before
     public void setUp(){
         Driver.getDriver();
-    }
-
-    @Given("^User navigates to Digital Bank login page$")
-    public void user_navigates_to_Digital_Bank_login_page() {
-
-    }
-
-    @Given("^Verify that web title is \"([^\"]*)\"$")
-    public void verify_that_web_title_is(String expectedTitle) {
-        String actualTitle = Driver.getDriver().getTitle();
-        Assert.assertEquals(expectedTitle, actualTitle);
-    }
-
-    @When("^User logs in with following credentials$")
-    public void user_logs_in_with_following_credentials(DataTable arg1) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-        // E,K,V must be a scalar (String, Integer, Date, enum etc)
-
-    }
-
-    @Then("^User successfully logged in to home page$")
-    public void user_successfully_logged_in_to_home_page() {
-
-    }
-
-    @When("^User logs in with \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void user_logs_in_with_and(String arg1, String arg2) {
-
-    }
-
-    @Then("^User should be displayed with the error message \"([^\"]*)\"$")
-    public void user_should_be_displayed_with_the_error_message(String arg1) {
-
     }
 
     @Given("^User navigates to Digital Bank signup page$")
@@ -161,16 +113,12 @@ public class DigitalBankRegistrationSteps {
         Driver.getDriver().findElement(By.cssSelector(""));
         Driver.getDriver().findElement(By.cssSelector(""));
     }
-//hellomia
 
-    @Then("^User should be displayed with the message \"([^\"]*)\"$")
-    public void user_should_be_displayed_with_the_message(String arg1) {
 
-    }
 
     @After
     public void tearDown(){
-//        Driver.closeDriver();
+        Driver.closeDriver();
     }
 
 }
