@@ -35,10 +35,14 @@ public class Driver {
             wait = new WebDriverWait(driver, 10);
         }
 
-        driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
         return driver;
 
+    }
+
+    public static void close() {
+        driver.quit();
     }
 }

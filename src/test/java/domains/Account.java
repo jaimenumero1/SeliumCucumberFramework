@@ -11,7 +11,11 @@ public class Account {
     }
 
     public void setType(String type) {
-        this.type = type;
+        type = type.trim().toLowerCase();
+        if(!type.equals("standard") || !type.equals("interest"))
+            type = "standard";
+
+        this.type = type.substring(0, 1).toUpperCase() + type.substring(1);
     }
 
     public String getOwnershipType() {
@@ -19,7 +23,14 @@ public class Account {
     }
 
     public void setOwnershipType(String ownershipType) {
-        this.ownershipType = ownershipType;
+        ownershipType = ownershipType.trim().toLowerCase();
+
+        if(!ownershipType.equals("individual")
+                || !ownershipType.equals("joint"))
+            ownershipType = "individual";
+
+        this.ownershipType = ownershipType.substring(0, 1).toUpperCase()
+                + ownershipType.substring(1);
     }
 
     public String getAccountName() {

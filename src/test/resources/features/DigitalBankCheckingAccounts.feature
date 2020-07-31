@@ -14,6 +14,6 @@ Feature: Checking account
     And Account information is matching
 
 
-  Scenario: HomePage basic Validation
-    Given user successfully logged in
-    When user creates account
+#  Scenario: HomePage basic Validation
+#    Given user successfully logged in
+#    When user creates account
