@@ -22,10 +22,6 @@ public class BrowserHelper {
     public static void waitForPageLoadComplete(WebDriver driver, int specifiedTimeout) {
         //TODO: Implement here:
 
-        Wait<WebDriver> wait = new WebDriverWait(driver, specifiedTimeout);
-        wait.until(driver1 -> String
-                .valueOf(((JavascriptExecutor) driver1).executeScript("return document.readyState"))
-                .equals("complete"));
     }
 
     /**
@@ -34,8 +30,7 @@ public class BrowserHelper {
     public static WebElement waitForVisibility(WebDriver driver, WebElement element, int timeToWaitInSec) {
         //TODO: Implement here:
 
-        WebDriverWait wait = new WebDriverWait(driver, timeToWaitInSec);
-        return wait.until(ExpectedConditions.visibilityOf(element));
+       return null;
     }
 
 
@@ -45,9 +40,6 @@ public class BrowserHelper {
     public static boolean isBlank(WebElement element) {
         //TODO: Implement here:
 
-        if (element.getAttribute("value").isEmpty()) {
-            return true;
-        }
         return false;
     }
 
@@ -57,7 +49,5 @@ public class BrowserHelper {
     public  static void jsClick(WebDriver driver,WebElement element){
         //TODO: Implement here:
 
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
     }
 }

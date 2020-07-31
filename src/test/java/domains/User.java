@@ -1,5 +1,4 @@
 package domains;
-
 /**
  * This class will be used for Cucumber DataTable mapping.
  * Create encapsulated fields for:
@@ -7,9 +6,7 @@ package domains;
  * Create getter methods for each field.
  *
  */
-
 public class User {
-
     private String title;
     private String firstName;
     private String lastName;
@@ -24,59 +21,43 @@ public class User {
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
-
     public String getTitle() {
         return title;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
+    public String getLastName() { return lastName; }
     public String getGender() {
         return gender;
     }
-
     public String getDob() {
         return dob;
     }
-
     public String getPassword() {
         return password;
     }
-
     public String getAddress() {
         return address;
     }
-
     public String getLocality() {
         return locality;
     }
-
     public String getRegion() {
         return region;
     }
-
     public String getPostalCode() {
         return postalCode;
     }
-
     public String getCountry() {
         return country;
     }
-
     public String getHomePhone() {
         return homePhone;
     }
-
     public String getMobilePhone() {
         return mobilePhone;
     }
-
     public String getWorkPhone() {
         return workPhone;
     }
