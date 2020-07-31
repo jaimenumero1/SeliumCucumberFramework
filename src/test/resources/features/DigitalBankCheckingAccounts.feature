@@ -12,3 +12,8 @@ Feature: Checking account
       | Standard  | Joint          | Test Name     | 20000       |
     Then User should be able to see a new account created
     And Account information is matching
+
+
+  Scenario: HomePage basic Validation
+    Given user successfully logged in
+    When user creates account
