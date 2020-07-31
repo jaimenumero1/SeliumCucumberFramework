@@ -17,26 +17,6 @@ import java.util.Random;
  */
 public class MockData {
 
-    private  FakeValuesService fakeValuesService = new FakeValuesService(
-            new Locale("en-US"), new RandomService());
 
-
-    public String generateRandomEmail(){
-
-        //TODO: Implement here
-
-        String email = fakeValuesService.bothify(new Faker().name().firstName() +"####@testemail.com");
-
-        return email;
-    }
-
-     public String generateRandomSsn(){
-
-        //TODO: Implement here
-
-        String ssn = String.format("%09d", new Random().nextInt(1000000000));
-
-        return ssn;
-    }
 
 }
