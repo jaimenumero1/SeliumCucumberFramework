@@ -162,7 +162,7 @@ public class DigitalBankRegistrationSteps {
         WebElement message = driver.findElement(By.xpath("//div[@class='sufee-alert alert with-close alert-success alert-dismissible fade show']//span[2]"));
         assertEquals("Failed: Error message mismatch",expectedMessage,message.getText().trim());
     }
-
+//this is the changes made after looser like me pulled and push
 
 }
 
