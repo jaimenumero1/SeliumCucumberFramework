@@ -44,66 +44,6 @@ public class User {
         this.ssn = ssn;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setLocality(String locality) {
-        this.locality = locality;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setHomePhone(String homePhone) {
-        this.homePhone = homePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
-
-
     public String getTitle() {
         return title;
     }
@@ -111,6 +51,8 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
+
+    public String getLastName() { return lastName; }
 
     public String getGender() {
         return gender;

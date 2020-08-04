@@ -3,8 +3,10 @@ package utilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  *
@@ -16,24 +18,31 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
     //TODO: Implement here
-    private static WebDriver driver;
 
-    private Driver(){};
+    private static WebDriver driver;
+    private static WebDriverWait wait;
+    private Driver(){}
+
+    public  static <T, V> V waitFor(Function<? super WebDriver, V > condition){
+        return wait.until(condition);
+    }
 
     public static WebDriver getDriver(){
-        if(driver == null){
+
+        if(driver==null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            wait = new WebDriverWait(driver, 10);
         }
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
         return driver;
+
     }
 
-    public static void closeDriver(){
-        if(driver != null) driver.quit();
+    public static void close() {
+        driver.quit();
     }
-
-
-
 }
